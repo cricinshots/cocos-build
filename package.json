@@ -1,6 +1,6 @@
 {
   "name": "cocos-build",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "private": "false",
   "description": "Cocos Creator Build Action",
   "main": "lib/main.js",
