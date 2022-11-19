@@ -29,7 +29,9 @@ async function run(): Promise<void> {
     const configPath = core.getInput('build_config')
     try {
       await exec('npm', ['install', '--force'])
+      console.log('npm install success')
       const {data} = await (await axios.get(downloadUrls)).data
+      console.log('downloadUrls success')
       const urlList = data[cocosType] as CCDownloadType[]
       const {version, darwin} =
         cocosVersion === '0.0.0'
@@ -41,8 +43,12 @@ async function run(): Promise<void> {
         darwin,
         `CocosCreator_V${version}.zip`
       )
+      console.log('Downloading cocos from ', `CocosCreator_V${version}.zip`)
+      console.log('ccZipPath', ccZipPath)
       await extractZip(`${ccZipPath}`, './')
+      console.log('extractZip success')
       await exec(`open ./CocosCreator.app`)
+      console.log('open CocosCreator.app success')
       await exec(
         `./CocosCreator.app/Contents/MacOS/CocosCreator --path ${projectPath} --build "configPath=${configPath}"`
       )

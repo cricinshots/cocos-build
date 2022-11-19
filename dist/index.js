@@ -65,7 +65,9 @@ function run() {
             const configPath = core.getInput('build_config');
             try {
                 yield exec_1.exec('npm', ['install', '--force']);
+                console.log('npm install success');
                 const { data } = yield (yield axios_1.default.get(downloadUrls)).data;
+                console.log('downloadUrls success');
                 const urlList = data[cocosType];
                 const { version, darwin } = cocosVersion === '0.0.0'
                     ? urlList[0]
@@ -73,8 +75,12 @@ function run() {
                         return value.version === cocosVersion;
                     });
                 const ccZipPath = yield tool_cache_1.downloadTool(darwin, `CocosCreator_V${version}.zip`);
+                console.log('Downloading cocos from ', `CocosCreator_V${version}.zip`);
+                console.log('ccZipPath', ccZipPath);
                 yield tool_cache_1.extractZip(`${ccZipPath}`, './');
+                console.log('extractZip success');
                 yield exec_1.exec(`open ./CocosCreator.app`);
+                console.log('open CocosCreator.app success');
                 yield exec_1.exec(`./CocosCreator.app/Contents/MacOS/CocosCreator --path ${projectPath} --build "configPath=${configPath}"`);
                 const artifactClient = artifact.create();
                 const artifactName = 'cocos-build-package';
