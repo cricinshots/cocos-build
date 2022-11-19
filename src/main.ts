@@ -50,7 +50,7 @@ async function run(): Promise<void> {
       await exec(`open ./CocosCreator.app`)
       console.log('open CocosCreator.app success')
       await exec(
-        `./CocosCreator.app/Contents/MacOS/CocosCreator --path ${projectPath} --build "configPath=${configPath}"`
+        `./CocosCreator.app/Contents/MacOS/CocosCreator --path "${projectPath}" --build "configPath=${configPath};"`
       )
       const artifactClient = artifact.create()
       const artifactName = 'cocos-build-package'

@@ -81,7 +81,7 @@ function run() {
                 console.log('extractZip success');
                 yield exec_1.exec(`open ./CocosCreator.app`);
                 console.log('open CocosCreator.app success');
-                yield exec_1.exec(`./CocosCreator.app/Contents/MacOS/CocosCreator --path ${projectPath} --build "configPath=${configPath}"`);
+                yield exec_1.exec(`./CocosCreator.app/Contents/MacOS/CocosCreator --path "${projectPath}" --build "configPath=${configPath};"`);
                 const artifactClient = artifact.create();
                 const artifactName = 'cocos-build-package';
                 const buildPath = './build';
