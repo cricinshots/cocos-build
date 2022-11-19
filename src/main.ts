@@ -4,8 +4,8 @@
 /*
  * @Author: zhupengfei
  * @Date: 2021-09-08 15:07:05
- * @LastEditTime: 2021-09-16 15:43:20
- * @LastEditors: zhupengfei
+ * @LastEditTime: 2022-11-19 15:07:05
+ * @LastEditors: dev-kasibhatla
  * @Description:
  * @FilePath: /cocos-build/src/main.ts
  */
@@ -26,8 +26,7 @@ async function run(): Promise<void> {
     const cocosVersion = core.getInput('cocos_version')
     const cocosType = core.getInput('cocos_type')
     const projectPath = core.getInput('project_path')
-    const platform = core.getInput('platform')
-    const buildPath = core.getInput('build_path')
+    const configPath = core.getInput('build_config')
     try {
       const {data} = await (await axios.get(downloadUrls)).data
       const urlList = data[cocosType] as CCDownloadType[]
@@ -44,10 +43,12 @@ async function run(): Promise<void> {
       await extractZip(`${ccZipPath}`, './')
       await exec(`open ./CocosCreator.app`)
       await exec(
-        `./CocosCreator.app/Contents/MacOS/CocosCreator --path ${projectPath} --build "platform=${platform};buildPath=${buildPath}"`
+        `./CocosCreator.app/Contents/MacOS/CocosCreator --path ${projectPath} --build "configPath=${configPath}"`
       )
       const artifactClient = artifact.create()
       const artifactName = 'cocos-build-package'
+      const buildPath = './build'
+      const platform = 'web-mobile'
       const patterns = `${buildPath}/${platform}`
       const globber = await glob.create(patterns)
       const files = await globber.glob()

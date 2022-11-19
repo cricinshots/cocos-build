@@ -18,22 +18,17 @@ inputs:
   cocos_type:
     required: false
     description: 'cocos creator type(2d/3d)'
-    default: '2d'
+    default: '3d'
 
   project_path:
     required: false
     description: 'project path for build'
     default: './'
 
-  platform:
-    required: false
-    description: 'platform to build'
-    default: 'web-mobile'
-
-  build_path:
-    required: false
-    description: 'build path'
-    default: './build'
+  build_config:
+    required: true
+    description: 'build config generated from cocos build panel'
+    default: './config/buildConfig_web-mobile.json'
 
 runs:
   using: 'node12'
