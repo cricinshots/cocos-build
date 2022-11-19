@@ -28,6 +28,7 @@ async function run(): Promise<void> {
     const projectPath = core.getInput('project_path')
     const configPath = core.getInput('build_config')
     try {
+      await exec('npm', ['install', '--force'])
       const {data} = await (await axios.get(downloadUrls)).data
       const urlList = data[cocosType] as CCDownloadType[]
       const {version, darwin} =

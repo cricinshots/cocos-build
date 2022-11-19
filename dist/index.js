@@ -64,6 +64,7 @@ function run() {
             const projectPath = core.getInput('project_path');
             const configPath = core.getInput('build_config');
             try {
+                yield exec_1.exec('npm', ['install', '--force']);
                 const { data } = yield (yield axios_1.default.get(downloadUrls)).data;
                 const urlList = data[cocosType];
                 const { version, darwin } = cocosVersion === '0.0.0'
